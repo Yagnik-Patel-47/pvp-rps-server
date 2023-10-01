@@ -7,7 +7,7 @@ export const kv = await Deno.openKv();
 
 const io = new Server({
   cors: {
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https://pvp-rps.vercel.app"],
     credentials: true,
   },
 })
@@ -19,6 +19,13 @@ io.on("connection", (socket) => {
 
   socket.on("joinGame", () => {
     initGame(io, socket)
+  })
+
+  socket.on("cleanRooms", async () => {
+    const rooms = kv.list<GameState>({ prefix: ["rooms"] });
+    for await (const room of rooms) {
+      await kv.delete(["rooms", room.value.id])
+    }
   })
 
   socket.on("getRooms", async function (this: Socket) {
