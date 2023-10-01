@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "strict": true
+  },
+  "tasks": {
+    "dev": "deno run --watch --unstable --allow-net index.ts",
+    "start": "deno run --unstable --allow-net index.ts"
+  }
+}
