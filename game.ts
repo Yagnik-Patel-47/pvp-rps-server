@@ -1,5 +1,5 @@
-import type { Server, Socket } from "https://deno.land/x/socket_io@0.2.0/mod.ts"
-import { kv } from "./index.ts"
+import type { Server, Socket } from "npm:socket.io"
+import { kv } from "./main.ts"
 import {
   generateId,
   GameState,
@@ -39,7 +39,7 @@ export function initGame(sio: Server, socket: Socket) {
         players: [data],
         state: "waiting",
       },
-      { expireIn: 1000 * 60 * 30 }
+      { expireIn: 1000 * 60 * 60 * 24 }
     )
     this.emit("getRoomData", {
       id: thisGameId,

@@ -1,5 +1,4 @@
-import { serve } from "https://deno.land/std@0.150.0/http/server.ts"
-import { Server, Socket } from "https://deno.land/x/socket_io@0.2.0/mod.ts"
+import { Server, type Socket } from "npm:socket.io"
 import { initGame } from "./game.ts"
 import { GameState } from "./lib.ts";
 
@@ -8,8 +7,8 @@ export const kv = await Deno.openKv();
 const io = new Server({
   cors: {
     origin: ["http://localhost:5173", "https://pvp-rps.vercel.app"],
-    credentials: true,
-  },
+    credentials: true
+  }
 })
 
 io.on("connection", (socket) => {
@@ -48,6 +47,8 @@ io.on("connection", (socket) => {
   });
 })
 
-await serve(io.handler(), {
-  port: 3000,
-})
+const PORT = 8000
+
+io.listen(PORT)
+console.log(`listening on port ${PORT}`);
+
