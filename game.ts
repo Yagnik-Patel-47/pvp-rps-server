@@ -1,5 +1,5 @@
 import type { Server, Socket } from "npm:socket.io"
-import { kv } from "./main.ts"
+import { kv } from "./index.ts"
 import {
   generateId,
   GameState,

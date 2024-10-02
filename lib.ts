@@ -1,4 +1,4 @@
-import { kv } from "./main.ts"
+import { kv } from "./index.ts"
 
 export const generateId = (length: number) => {
   let result = ""
